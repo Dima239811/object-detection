@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Видеоанализ</title>
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header>
+        <div>Система Видеоаналитики</div>
+        <div id="podz">Сбор данных количества машин и людей</div>
+    </header>
+    <buttons>
+        <button class="submit" type="people_analiz" onclick="people_analiz()"><p>Анализ людей</p></button>
+        <button class="analysis" type="car_analiz" onclick="openModal()"><p>Анализ машин</p></button>
+        <!-- Модальное окно -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal()">&times;</span>
+                <h2>Введите путь к файлу</h2>
+
+                <div class="inputandbut">
+                    <input class="input_but" type="text" id="car_file_path" placeholder="Введите путь к файлу">
+                    <button class="close" onclick="handleFilePathInput()">Анализировать</button>
+                </div>
+                
+            </div>
+        </div>
+
+        <button type="submit" onclick="statistic_people()"><p>Cтатистика людей</p></button>
+        <button type="analysis" onclick="statistic_car()"><p>Cтатистика машин</p></button>
+        
+    </buttons>
+
+    
+
+    <script>
+        async function people_analiz(){
+              alert('Вы запустили выполнение программы, сверните окно и перейдите в программу видеоанализа');
+              await eel.call_analiz();
+        };
+
+        async function car_track(file) {
+            alert('Вы запустили выполнение программы, сверните окно и перейдите в программу видеоанализа');
+            await eel.call_analiz_car(file);
+        }
+
+        async function statistic_people() {
+            const imagePath = "results/stats_people.png";
+            await eel.show_stats(imagePath)
+        }
+        
+        async function statistic_car() {
+            const imagePath = "results/stats_car.png";
+            await eel.show_stats(imagePath)
+        }
+
+
+        function openModal() {
+            document.getElementById("modal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+        function handleFilePathInput() {
+            const filePathInput = document.getElementById("car_file_path");
+            const filePath = filePathInput.value;
+            closeModal();
+            car_track(filePath)
+        }
+
+    </script>
+
+    <footer> <div id="foot">Контакты разработчиков:</div> </footer>
+</body>
+
+</html>
